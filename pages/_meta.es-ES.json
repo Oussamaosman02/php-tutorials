@@ -1,0 +1,15 @@
+{
+    "index": "Introducción",
+    "php": "php",
+    "about": {
+      "title": "Sobre",
+      "type": "page"
+    },
+    "contact": {
+      "title": "Contacto ↗",
+      "type": "page",
+      "href": "https://twitter.com/shuding_",
+      "newWindow": true
+    }
+  }
+  
