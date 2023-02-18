@@ -1,29 +1,6 @@
-# PHP
+# PHP - English
 
 > This php beginner friendly tutorial is from [this video](https://www.youtube.com/watch?v=BUCiSSyIGGU) and this is the [original repo](https://github.com/bradtraversy/php-crash)
-
-## Index
-
-- [Initialize php](#initialize-php)
-- [Output](#output)
-- [Variables](#variables)
-- [Constants](#constants)
-- [Arrays](#arrays)
-- [Operators](#operators)
-- [Conditionals](#conditionals)
-- [Loops](#loops)
-- [Functions](#functions)
-- [Array functions](#array-functions)
-- [String Functions](#string-functions)
-- [Superglobals](#superglobals)
-- [GET and POST](#get-and-post)
-- [Sanitize Inputs](#sanitize-inputs)
-- [Cookies](#cookies)
-- [Sessions](#sessions)
-- [File Handling](#file-handling)
-- [File Uploading](#file-uploading)
-- [Exceptions](#exceptions)
-- [OOP](#oop)
 
 ## Initialize php
 

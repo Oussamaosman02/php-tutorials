@@ -1,29 +1,6 @@
-# PHP
+# PHP - Español
 
-> Este tutorial para principiantes de php es de [este video](https://www.youtube.com/watch?v=BUCiSSyIGGU) y este es el [repositorio original](https://github.com/bradtraversy/php-crash)
-
-## Index
-
-- [Empezar php](#initialize-php)
-- [Salida](#output)
-- [Variables](#variables)
-- [Constantes](#constants)
-- [Arrays](#arrays)
-- [Operadores](#operators)
-- [Condicionales](#conditionals)
-- [Bucles](#loops)
-- [Funciones](#functions)
-- [Funciones de Array](#array-functions)
-- [Funciones de Cadena](#string-functions)
-- [Superglobales](#superglobals)
-- [GET y POST](#get-and-post)
-- [Securizar Inputs](#sanitize-inputs)
-- [Cookies](#cookies)
-- [Sesiones](#sessions)
-- [Manejo de ficheros](#file-handling)
-- [Subida de ficheros](#file-uploading)
-- [Excepciones](#exceptions)
-- [POO](#oop)
+> Este tutorial para principiantes de php es de [este video](https://www.youtube.com/watch?v=BUCiSSyIGGU) y este es el [repositorio original](https://github.com/Olivertraversy/php-crash)
 
 ## Empezar php
 
@@ -782,11 +759,11 @@ echo $hola; // Hola!
 Los argumentos definen que va dentro de la función y los parámetros son pasados a la función dentro de `()` cuándo es llamada.
 
 ```php
-function name ($argumento) {
+function nombre ($argumento) {
   // código a ejecutar
 }
 
-name(parameter);
+nombre(parameter);
 ```
 
 Un ejemplo :
@@ -980,7 +957,7 @@ print_r($frutas);
 
 ### Dividir un array
 
-Para este ejemplo, dividiremos el array  en dos partes, pero se pude hacer en cuantas partes se quiera y pueda.
+Para este ejemplo, dividiremos el array en dos partes, pero se pude hacer en cuantas partes se quiera y pueda.
 
 ```php
 $array_dividido = array_chunk($frutas,2);
@@ -1025,7 +1002,7 @@ $a = ['rojo','verde','azul'];
 $b = ['aguacate','manzana','plátano'];
 ```
 
-Para combinar estos dos arrays, usamos la función  `array_combine()`:
+Para combinar estos dos arrays, usamos la función `array_combine()`:
 
 ```php
 $c = array_combine($a,$b);
@@ -1198,265 +1175,265 @@ echo substr($cadena, 4); // Mundo
 
 ### Visualizar cadena formateada
 
-If e have some string that will have a part that will be fixed and other tha will change depending on the data, we can use the `printf()` built in function, that we could use with substrinsg :
+Si tenemos texto que tuviera una parte fija y otra que cambia dependiendo del dato, podemos usar la función `printf()` , que podemos usar con una subcadena :
 
 ```php
-printf('%s likes to %s','Juan','code');
-// Juan likes to code
+printf('A %s le gusta %s','Juan','zonabit');
+// A Juan le gusta zonabit
 ```
 
-The `%s` is the substitution of the string. Now, an example with numbers :
+El `%s` es la sustitución de la cadena. Ahora, veamos un ejemplo con números:
 
 ```php
 printf('1+1=%d',1+2);
 // 1+1=3
 ```
 
-In this case, the `%d` replace the number passed in the next argument.
+En este caso, el `%d` reemplaza el número pasado como argumento.
 
-### Handle html strings
+### Manejar cadenas de html
 
-If we `echo` any html tag, like `h1` or `hr`, it will be displayed as it was normal html as it isn't parsed.
+Si hacemos un `echo` de cualquier etiqueta html, como `h1` o `hr`, se visualizará como html normal ya que no se 'parsea'.
 
-That, in terms of security, while having a form or something like that can be extremely dangerous, as if we do the following :
+Esto, en términos de seguridad, teniendo un formulario o algo parecido pude ser muy peligroso, ya que si hacemos lo siguiente:
 
 ```php
 echo '<script>alert(1)</script>';
 ```
 
-The `script` will be executed as if it was the common `script` tag.
+El `script` se ejecutará como si fuera una etiqueta `script` normal.
 
-At first look it may be not seems like a big problem, but if we have some input as i said before, and we echo the value given by the user in that input, if he puts his name, the result will be something like this :
-
-```php
-$input_value = 'Juan';
-
-echo $input_value;// Juan
-```
-
-But, if he puts an `script` in the input field, it will be interpreted as common html.
+A primera vista puede parecer un gran problema, pero si tenemos algún `input` como hemos dicho anteriormente, y hacemos un `echo` del valor dado por el usuario en ese `input`, si pone su nombre, el resultado sería algo como esto:
 
 ```php
-$input_value = '<script>alert(10)</script>';
+$valor_input = 'Felipe';
 
-echo $input_value;
-// this will give an alert in the browser
+echo $valor_input;// Felipe
 ```
 
-Imagine that the users could run any javascript and change the functionality of your web, and even worst, change or delete important information like the storojo in your database!
+Pero, si ponemos un `script` en el campo del `field`, se interpretará como html normal.
 
-For this we have two ways to fix it :
+```php
+$valor_input = '<script>alert(10)</script>';
 
-- Html Special Chars
+echo $valor_input;
+// esto dará una alerta en el navegador
+```
+
+Imagina que todos los usuarios pueden ejecutar cualquier JavaScript y cambiar la funcionalidad de tu web, e incluso peor, !cambiar o borrar información importante como la guardada en tu base de datos!
+
+Para este problema tenemos vamos a ver dos formas de arreglarlo:
+
+- Caracteres especiales de Html (Html Special Chars)
   :
   ```php
-  echo htmlspecialchars($input_value);
+  echo htmlspecialchars($valor_input);
   // <script>alert(1)</script>
   ```
-- Html Entities
+- Entidades Html (Html Entities)
   :
   ```php
-  echo htmlentities($input_value);
+  echo htmlentities($valor_input);
   // <script>alert(1)</script>
   ```
 
-## Superglobals
+## Superglobales
 
-We already have seen that in php there are some built in functions, but also there are built in variables, that are available in all scopes (inside or outside a function). They usually start with `$_` and all of them are arrays :
+Ya hemos visto que en php hay algunas funciones incorporadas por defecto ('built in'), pero también hay variables por defecto, que son variables que están disponibles en cualquier ámbito o scope (dentro y fuera de una función). Normalmente empiezan con `$_` todas con arrays :
 
 - `$_GET`
-  : Contains information about variables passed through a URL or a form.
+  : Contiene información sobre variables pasadas por URL o por un formulario con el método 'get'.
 - `$_POST`
-  : Contains information about variables passed through a form.
+  : Contiene información sobre variables pasadas por un formulario con el método 'post'.
 - `$_COOKIE`
-  : Contains information about variables passed through a cookie.
+  : Contiene información sobre variables pasadas por cookies.
 - `$_SESSION`
-  : Contains information about variables passed through a session.
+  : Contiene información sobre variables pasadas por sesiones.
 - `$_SERVER`
-  : Contains information about the server environment.
+  : Contiene información sobre el entorno del servidor.
 - `$_ENV`
-  : Contains information about the environment variables.
+  : Contiene información sobre las variables de entorno.
 - `$_FILES`
-  : Contains information about files uploaded to the script.
+  : Contiene información sobre archivos subidos al script.
 - `$_REQUEST`
-  : Contains information about variables passed through the form or URL.
+  : Contiene información sobre variables pasadas por un formulario o URL.
 
-## GET and POST
+## GET y POST
 
-In the [handle html strings section](#handle-html-strings) we have talked about inputs and getting data that an user type. For doing that we will need this superglobals.
+En la sección de [manejar cadenas de html](#manejar-cadenas-de-html) hemos hablado de 'inputs' y recoger datos que le usuario escribe. Para hacer eso necesitaremos los superglobales.
 
-We can pass data through urls (`$_GET`) and forms (`$_GET`, `$_POST`) using this superglobals.
+Podemos pasar datos a través de las urls (`$_GET`) y formularios (`$_GET`, `$_POST`) usando estos superglobales.
 
 ### GET
 
-`$_GET` can read data from an form and from an url.
+`$_GET` puede leer datos desde un formulario y una url.
 
-If we have some argument that we want to pass trough pages, we can add it to the anchor `href` atribute like this:
-
-```php
-<a href="/profile.php?name=Brad">Click me</a>
-```
-
-In that piece of code, we are saying that we want to go the this url:
-
-`/profile.php?name=Brad`
-
-If we take a look, we have a `name` atribute that is equal to `Brad`, that's the atribute we will read in the `$_GET`.
-And as it is a valid url, we will go there.
-
-Now, in the **profile.php** file, we have the `$_GET` ready, listening to the name :
+Si tenemos algún argumento que queremos pasar a través de páginas, podemos añadirlo al atributo `href` de la etiqueta `<a>` así:
 
 ```php
-<?php
-  echo $_GET['name'];
-  // Brad
-?>
+<a href="/perfil.php?nombre=Oliver">Pulsa</a>
 ```
 
-The `$_GET` reads the `name` atribute from the url.
+En esa pieza de código, estamos diciendo que queremos ir a esta url:
 
-If we want to add more data, we can use the `&` :
+`/perfil.php?nombre=Oliver`
 
-```php
-<a href="/profile.php?name=Brad&active=true">Click me</a>
-```
+Si echamos un vistazo, tenemos un atributo `nombre` que es igualado a `Oliver`, que es el atributo que se leerá en el `$_GET`.
+Y como es una url válida, irá a esa página.
 
-And, in the **profile.php** file :
+Ahora, en el archivo **perfil.php**, tenemos el `$_GET` preparado, escuchando por el atributo nombre:
 
 ```php
 <?php
-  echo $_GET['name'];
-  echo $_GET['active'] ? ' is active' : ' is not active';
+  echo $_GET['nombre'];
+  // Oliver
 ?>
-// Brad is active
 ```
 
-Now, lets try this with forms.
+El `$_GET` lee el atributo `nombre` desde la url.
 
-First, we need to built our form:
+Si queremos añadir más datos, podemos usar el `&` :
+
+```php
+<a href="/perfil.php?nombre=Oliver&activo=true">Pulsa</a>
+```
+
+Y, en el archivo **perfil.php** :
+
+```php
+<?php
+  echo $_GET['nombre'];
+  echo $_GET['activo'] ? 'está activo' : 'no está activo';
+?>
+// Oliver está activo
+```
+
+Ahora, intentemos esto con formularios.
+
+Primero, necesitaremos construir nuestro formulario:
 
 ```php
 <form>
-  <label>Name :</label>
+  <label>Nombre :</label>
   <input type="text" />
   <br />
-  <label>Age</label>
+  <label>Edad</label>
   <input type="number" />
   <br />
   <input type="submit" />
 </form>
 ```
 
-This is a regular form, but as we are working with PHP, we need to add some atributes to it :
+Este es un formulario normal, pero como estamos trabajando con PHP, necesitamos añadir ciertos atributos al formulario:
 
 ```php
-<form action="/profile.php" method="GET">
-  <label>Name :</label>
-  <input type="text" name="name" />
+<form action="/perfil.php" method="GET">
+  <label>Nombre :</label>
+  <input type="text" name="nombre" />
   <br />
-  <label>Age</label>
-  <input type="number" name="age" />
+  <label>Edad</label>
+  <input type="number" name="edad" />
   <br />
   <input type="submit" name="submit" />
 </form>
 ```
 
-We have added several things :
+Hemos añadido unas cuantas cosas :
 
 - name
-  : to let `$_POST` and `$_GET` read the value when submiting.
+  : para permitir a `$_POST` y `$_GET` leer el valor cuando se envié.
 - method
-  : to specify if we want it as POST or GET when submiting (default is GET).
+  : para especificar si lo queremos con POST o GET cuando se envié (por defecto es GET).
 - action
-  : this will send the data to the specified php file in this atribute ('/' send to the same file).
+  : esto especifica el archivo php al que se le enviarán los datos (con '/' envía la información a si mismo).
 
-Now, if we click in the submit button, we will be rojoirected to the `profile.php` file, and we will pass to it the data :
+Ahora, si pulsamos el botón de enviar, seremos redirigidos al archivo `perfil.php`, y se le pasarán los datos :
 
 ```php
 <?php
-  echo $_GET['name'];
+  echo $_GET['nombre'];
   echo '<br/>';
-  echo $_GET['age'];
+  echo $_GET['edad'];
 ?>
-// Brad
+// Oliver
 // 30
 ```
 
-The age and name stands for the `name` atribute in each input.
+La edad y nombre vienen del atributo `name` de cada input.
 
-But, if look at the url of this progilr.php, we will see something like this :
+Pero, si miramos a la url del perfil.php, veremos algo como esto :
 
 ```
-/profile.php?name=Brad&age=30&submit=Submit
+/perfil.php?nombre=Oliver&edad=30&submit=Submit
 ```
 
-This does not look very clean, that is why we will use the POST method and the `$_POST` to get that data with a much cleaner and friendly url.
+Esto no queda muy limpio, es por ello por lo que usamos el método POST y el `$_POST` para obtener los datos de forma más limpia y amigable con la url.
 
 ### POST
 
-`$_POST` is only used with forms as it hasn't access to the url parameters.
+`$_POST` solo es usado con formularios ya que no tiene acceso a los parámetros de la url.
 
-For using it, we only change the `method` atribute in the main php file :
+Para usarlo, solo cambiamos el atributo `method` en la función que envía los datos :
 
 ```php
-<form action="profile.php" method="POST">
-    <label>Name :</label>
-    <input type="text" name="name" />
+<form action="perfil.php" method="POST">
+    <label>Nombre :</label>
+    <input type="text" name="nombre" />
     <br />
-    <label>Age</label>
-    <input type="number" name="age" />
+    <label>Edad</label>
+    <input type="number" name="edad" />
     <br />
     <input type="submit" name="submit" />
 </form>
 ```
 
-And, we have to change the `$_GET` in the **profile.php** file for the `$_POST` ones :
+Y, tenemos que cambiar el `$_GET` del archivo **perfil.php** por el `$_POST` donde aparezca :
 
 ```php
 <?php
-  echo $_POST['name'];
+  echo $_POST['nombre'];
   echo '<br/>';
-  echo $_POST['age'];
+  echo $_POST['edad'];
 ?>
-// Brad
+// Oliver
 // 30
 ```
 
-Now, we have the same result as before, but with a cleaner url.
+Ahora, tenemos el mismo resultado que antes, pero con una url mucho más limpia.
 
-### Undefined array key problem
+### Problema del 'Undefined array key'
 
-If we tr this GET and POST methods to our own file, or we try to access directly (from the url) to the **profile.php** file, we will see this error :
+Si probamos los métodos GET y POST en nuestro propio archivo, o intentamos acceder a ellos directamente desde la url del archivo **perfil.php**, veremos este error :
 
 ```
-Warning: Undefined array key "name" in /var/www/html/profile.php on line 14
+Warning: Undefined array key "nombre" in /var/www/html/perfil.php on line 14
 ```
 
-This is thrown because at the time to make that request to the server, any `name` parameter or ulr-atribute is set, so it's undefined.
+Esto ocurre porque a la hora de hacer la primera petición al servidor, no hay ningún parámetro `nombre` ni tampoco ningún atributo por url, así que es indefinido ('undefined').
 
-But, how can we avoid this, as at the first time that page loads, it will be none atribute set.
+Pero, ¿Cómo podemos evitar esto?, porqué está claro que la primera vez que cargue la página , no habrá ningún atributo definido.
 
-The way to solve this problem is with the `isset()` built in function :
+La forma de solucionar este error es con la función `isset()` :
 
 ```php
 <?php
 if(isset($_POST['submit'])){
-  echo $_POST['name'];
+  echo $_POST['nombre'];
   echo '<br/>';
-  echo $_POST['age'];
+  echo $_POST['edad'];
 }
 ?>
 ```
 
-## Sanitize Inputs
+## Agregar seguridad
 
-We have talked early about some [security risks](#handle-html-strings) that inputs can have, so let's upgrade that knowledge adding a new wat to sanitize your inputs and make them more safe.
+Hemos hablado antes sobre algunos [riesgos en la seguridad](#manejar-cadenas-de-html) que pueden conllevar los inputs, así que vamos a profundizar en este tema añadiendo formas para hacer los inputs más seguros.
 
-Apart from the `htmlspecilchars` or `htmlentities` we can use other built in function called `filter_input()`.
+Aparte del `htmlspecilchars` o `htmlentities` podemos usar otra función por defecto llamada `filter_input()`.
 
-This function needs 3 atributes:
+Esta función necesitas 3 argumentos:
 
-1. The type, that can be any of this :
+1. El tipo, que solo puede ser uno de estos :
 
    - INPUT_GET
    - INPUT_POST
@@ -1464,387 +1441,387 @@ This function needs 3 atributes:
    - INPUT_SERVER
    - INPUT_ENV
 
-   Each one corresponds to a [superglobal variable](#superglobals) In our case, as we have the POST method,we will use the `INPUT_POST`.
+   Cada uno corresponde a una [variable superglobal](#superglobales). En nuestro caso, como tenemos el método POST, usaremos el `INPUT_POST`.
 
-2. The variable name :
+2. El nombre de la variable :
 
-   This is the string that goes inside the `[]` in the `$_POST`.
+   Este es el nombre de la variable, que va dentro de los corchetes (`[]`) después del `$_POST`.
 
-   In this case, as we only need to sanitize the name input, this string will be `name`.
+   En este caso, como solo vamos a añadir seguridad al input del nombre, el nombre que le pasaremos será `nombre`.
 
-3. The filter :
+3. El filtro :
 
-   In this argument, we have to specify the ID of the filter to apply.
+   En este argument, necesitamos especificar el ID del filtro que aplicar.
 
-   In our case, we will use the `FILTER_SANITIZE_SPECIAL_CHARS`.
+   En nuestro caso, usaremos el `FILTER_SANITIZE_SPECIAL_CHARS`.
 
-Once said that, the result will look like this :
+Una vez hecho esto, el resultado sería algo como esto :
 
 ```php
 <?php
 if (isset($_POST['submit'])) {
-  $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
-  echo $name;
+  $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
+  echo $nombre;
   echo '<br/>';
-  echo $_POST['age'];
+  echo $_POST['edad'];
 }
 ?>
 ```
 
-Other way to sanitize our inputs is using `filter_var()`, that works similar as `filter_input()`, but this can be used with mora things than inputs.
+Otra forma de añadir seguridad a los inputs es usando la función `filter_var()`, que es parecida a `filter_input()`, pero esta puede ser usada con más cosas aparte de inputs.
 
 Un ejemplo :
 
 ```php
 <?php
 if (isset($_POST['submit'])) {
-  $name = filter_var($_POST['name'], FILTER_SANITIZE_SPECIAL_CHARS);
-  echo $name;
+  $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_SPECIAL_CHARS);
+  echo $nombre;
   echo '<br/>';
-  echo $_POST['age'];
+  echo $_POST['edad'];
 }
 ?>
 ```
 
 ## Cookies
 
-Cookies ara a mechanism for storing data in the remote browser and thus tracking or identifying return users. You can set specific data to be storojo in the browser, and then retrieve it when the user visits the site again.
+Las cookies son un mecanismo para guardar datos en el navegador e identificar de vuelta a los usuarios. Puedes poner datos específicos para que sean guardados en el navegador in the browser, y volver a cogerlos cuando el usuario vuelva a visitar la página.
 
-### Set cookie
+### Crear una cookie
 
-For setting the cookie, we will need 3 parameters:
+Para crear una cookie, necesitaremos 3 parámetros:
 
 - Key
-  : For referencing that cookie in the future.
-- value
-  : The value of that cookie.
-- Expiration time
-  : When we want that the cookie expire.
+  : Para referenciar la cookie en un futuro.
+- Valor
+  : El valor que tendrá la cookie.
+- Tiempo de expiración
+  : Cuándo queremos que esa cookie caduque.
 
 Un ejemplo :
 
 ```php
-setcookie('name','Brad',time()+86400);
-// we set the cooki for one day
+setcookie('nombre','Oliver',time()+86400);
+// hemos puesto la cookie para un día
 ```
 
-### Read cookie
+### Leer una cookie
 
-For this we will use the `$_COOKIE` superglobal :
+Para esto usaremos La variable superglobal `$_COOKIE`:
 
 ```php
-if(isset($_COOKIE['name'])){
-  echo $_COOKIE['name'];
+if(isset($_COOKIE['nombre'])){
+  echo $_COOKIE['nombre'];
 }
 ```
 
-### Delete a cookie
+### Borrar una cookie
 
-For deleting a cookie is as simple and logical as set to it an passed expiration date:
+Borrar una cookie es tan simple y lógico como ponerle una fecha de expiración pasada:
 
 ```php
-setcookie('name','',time()-86400);
+setcookie('nombre','',time()-86400);
 ```
 
-## Sessions
+## Sesiones
 
-Sessions are a way to store information (in variables) to be used across multiple pages.
+Las sesiones son una forma de guardar información (en variables) para usarlas a través de multiples páginas.
 
-Unlike cookies, sessions are storojo on the server and not in the client.
+A diferencia de las cookies, las sesiones son guardadas en el servidor y no en el cliente.
 
-First of all, for using sessions in any php file, you need to put the "initializer" :
+Primero de todo, para poder usar sesiones en cualquier archivo php, necesitamos indicar un "inicializador" :
 
 ```php
 <?php
 session_start();
-// code
+// código
 ?>
 ```
 
-### Set session
+### Crear una sesión
 
 ```php
-$username = $_POST["username"];
-$_SESSION['username'] = $username;
+$nombre_usuario = $_POST["nombre_usuario"];
+$_SESSION['nombre_usuario'] = $nombre_usuario;
 ```
 
-### Read session
+### Leer una sesión
 
 ```php
-$username = $_SESSION['username'];
+$nombre_usuario = $_SESSION['nombre_usuario'];
 ```
 
-### Delete session
+### Borrar una sesión
 
 ```php
 session_destroy();
 
-// we can rojoirect to other page
+// podemos redirigir a otra página
 header('Location:/index.php');
 ```
 
-## File handling
+## Manejo de archivos
 
-File handling is the ability to read and write files on the server.
+El manejo de archivos es la habilidad de leer y escribir archivos en el servidor.
 
-PHP has built in functions for reading and writing files.
+PHP tiene funciones por defecto para leer y escribir archivos.
 
-First, we need to create a file, that we will call `users.txt`, that will have the following content :
+Primero, necesitamos crear un archivo, que vamos a llamar `usuarios.txt`, que tendrá el siguiente contenido :
 
 ```txt
-Brad
+Oliver
 Juan
 Sara
-Steve
-Harry
+Esteban
+Enrique
 ```
 
-Also we will create a variable called `filep` that will contain the path to the `users.txt` :
+También crearemos una variable llamada `archivop` que contendrá la ruta de `usuarios.txt` :
 
 ```php
-$filep = './users.txt';
+$archivop = './usuarios.txt';
 ```
 
-### File exists
+### ¿Existe el archivo?
 
 ```php
-file_exists($filep);
+file_exists($archivop);
 ```
 
-### Read file
+### Leer el archivo
 
 ```php
-echo readfile($filep);
-// Brad Juan Sara Steve Harry26
+echo readfile($archivop);
+// Oliver Juan Sara Esteban Enrique
 ```
 
-Other way to read a file is with `fread()`, that need 2 arguments : stream and length :
+Otra forma de leer un archivo es con el `fread()`, que necesita 2 argumentos : el stream y la longitud (length) :
 
 ```php
-$handle = fopen($filep,'r');
-// r means open for reading only
-$contents = fread($handle,filesize($filep));
+$handle = fopen($archivop,'r');
+// r significa abrir el archivo solo para leer (read)
+$contents = fread($handle,filesize($archivop));
 fclose($handle);
 echo $contents;
-// Brad Juan Sara Steve Harry
+// Oliver Juan Sara Esteban Enrique
 ```
 
-### Writing file
+### Escribiendo en un archivo
 
 ```php
-$handle = fopen($filep,'w');
-// r means open for writing only
-$contents = 'Brad Juan Mike';
+$handle = fopen($archivop,'w');
+// w significa abrir el archivo para escribir (write)
+$contents = 'Oliver Juan Miguel';
 fwrite($handle,$contents);
 fclose($handle);
 ```
 
-If we want it with line breacks, we will use `PHP_EOL`:
+Si queremos saltos de linea, podemos usar `PHP_EOL`:
 
 ```php
-$handle = fopen($filep,'w');
-// r means open for writing only
-$contents = 'Brad'.PHP_EOL.'Juan'.PHP_EOL.'Mike';
+$handle = fopen($archivop,'w');
+// w significa abrir el archivo para escribir (write)
+$contents = 'Oliver'.PHP_EOL.'Juan'.PHP_EOL.'Miguel';
 fwrite($handle,$contents);
 fclose($handle);
 ```
 
-## File uploading
+## Subir archivos
 
-For uploading a file, first we need a form so let's make it :
+Para subir un archivo, primero necesitamos un formulario, así que, vamos a crearlo :
 
 ```php
 <form action="/" method="POST" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="upload">
+    Selecciona una imagen para subir:
+    <input type="file" name="subida">
     <br />
     <input type="submit" name="submit" value="Submit" />
 </form>
 ```
 
-Something really important when uploading files is that the `enctype` atribute must be set, if it in's, it will not work.
+Algo muy importante a la hora de subir archivos es que el atributo `enctype` debe estar indicado, si no está puesto, no funcionará.
 
-For the file uploading, we will use one of the [superglobals](#superglobals), the `$_FILES` one.
+Para la subida de archivos, usaremos uno de los [superglobales](#superglobales), el superglobal `$_FILES`.
 
-In this case, we will need the target directory and the file tmp directory. This last one is within the `$_FILES` superglobal.
+En este caso, necesitaremos el directorio objetivo y el directorio temporal (tmp) del archivo. Este último viene por defecto en el `$_FILES`.
 
 ```php
-$file_name = $_FILES['upload']['name']
-$target_dir = "uploads/{$file_name}";
-$file_tmp = $_FILES['upload']['tmp_name'];
+$archivo_nombre = $_FILES['subida']['name']
+$dir_objetivo = "subidas/{$archivo_nombre}";
+$archivo_tmp = $_FILES['subida']['tmp_name'];
 
-move_uploaded_file($file_tmp,$target_dir);
+move_uploaded_file($archivo_tmp,$dir_objetivo);
 ```
 
-## Exceptions
+## Excepciones
 
-PHP has an exception model similar to that of other programming languages. An exception can be thrown, and caught ("cached") within PHP. Code may be surrounded in a try block, to facilitate the catching of potential exceptions. Each tru must hav at least one corresponding catch or finally block.
+PHP tiene un modelo de excepciones parecido a otros lenguajes de programación. Un excepción puede ser lanzada, y cogida ("cached") dentro de PHP. EL código puede estar rodeado por un bloque `try`, para facilitar el cacheo ('guardado en cache') de potenciales excepciones. Cada `try` debe tener al menos un `catch` o bloque final correspondiente.
 
-For example, we want to throw an error if we try to divide by 0:
+Por ejemplo, queremos lanzar un error si intentamos dividir por 0:
 
 ```php
-function inverse($x) {
+function inverso($x) {
   if(!$x) {
-    throw new Exception('Division by zero');
+    throw new Exception('División por 0');
   }
   return 1/$x;
 }
 
-echo inverse(10); // 0.1
-echo inverse(0);
-// Fatal error: Uncaught Exception: Division by zero
+echo inverso(10); // 0.1
+echo inverso(0);
+// Fatal error: Uncaught Exception: División por 0
 ```
 
-But let do something with that uncaught exception.
+Pero hagamos algo con la excepción.
 
-We will do the `echo` inside a `try...catch` block and see what happens :
+Haremos un `echo` dentro del bloque `try...catch` y veamos que pasa :
 
 ```php
 try {
-  echo inverse(10);
-  echo inverse(0);
+  echo inverso(10);
+  echo inverso(0);
 } catch (Exception $e) {
-  echo ' Caught Exception ', $e->getMessage();
+  echo ' Excepción ', $e->getMessedad();
 }
-// 0.1 Caught Exception Division by zero
+// 0.1 Excepción División por 0
 ```
 
-We also have `finally` block, that is agnostic about what happens in the `try...catch` :
+También tenemos el bloque final (`finally`), que es agnóstico sobre lo que pase en el bloque `try...catch` :
 
 ```php
 try {
-  echo inverse(10);
-  echo inverse(0);
+  echo inverso(10);
+  echo inverso(0);
 } catch (Exception $e) {
-  echo ' Caught Exception ', $e->getMessage();
+  echo ' Excepción ', $e->getMessedad();
 } finally {
-  echo ' Finally!';
+  echo ' ¡Finalmente!';
 }
-// 0.1 Caught Exception Division by zero Finally!
+// 0.1 Excepción División por 0 ¡Finalmente!
 ```
 
-## OOP
+## POO
 
-From PHP5 onwards you can write PHP in either procedural or object orientated way. OOP consists of classes that can hold "properties" and "methods", Objects can be created from classes.
+Desde PHP5 en adelante se puede escribir PHP de forma funcional o orientada a objetos. La POO consiste en clases que pueden tener "propiedades" y "métodos".Los Objetos pueden ser creados a partir de clases.
 
-Lets create a user using OOP!
+Vamos a crear usuarios con POO:
 
 ```php
-class User {
-  public $name;
+class Usuario {
+  public $nombre;
   public $email;
-  public $password;
+  public $contra;
 }
 ```
 
-Those are properties, that are atributes that belong to a class.
+Esas son propiedades, que son atributos que pertenecen a una clase.
 
-Now, we can instantiate a user object :
+Ahora, podemos instanciar un objeto del usuario :
 
 ```php
-$user1 = new User();
+$usuario1 = new Usuario();
 
-var_dump($user1);
-// object(User)#1 (3) { ["name"]=> NULL ["email"]=> NULL ["password"]=> NULL }
+var_dump($usuario1);
+// object(Usuario)#1 (3) { ["nombre"]=> NULL ["email"]=> NULL ["contra"]=> NULL }
 ```
 
-Everything is `NULL` as we didn't specify that values, so let's into it :
+Todo es `NULL` (nulo) porque no hemos especificado esos valores, por lo tanto, vamos a crearlos :
 
 ```php
-$user1 = new User();
-$user1->name = 'Juan';
-$user1->email = 'fedevalverde@gmail.com';
-$user1->password = '1234';
-print_r($user1);
-// User Object ( [name] => Juan [email] => fedevalverde@gmail.com [password] => 1234 )
+$usuario1 = new Usuario();
+$usuario1->nombre = 'Federico';
+$usuario1->email = 'fedevalverde@gmail.com';
+$usuario1->contra = '1234';
+print_r($usuario1);
+// Usuario Object ( [nombre] => Federico [email] => fedevalverde@gmail.com [contra] => 1234 )
 ```
 
-### Access modifiers
+### Modificadores de acceso
 
-There are 3 types of access modifiers :
+Hay 3 tipos de modificadores de acceso :
 
-- Public
-  : can be accessed from anywhere.
-- Private
-  : can only be accessed from inside the class.
-- Protected
-  : can only be accessed from inside the class and by inheriting classes.
+- Public (público)
+  : puede ser accedido desde cualquier parte.
+- Private (privado)
+  : solo puede ser accedido desde dentro de la clase.
+- Protected (protegidos)
+  : solo puede ser accedido desde dentro de la clase y clases heredadas.
 
-### Method
+### Método
 
-Method is a function that belongs to a class.
+El método ('method') es una función que pertenece a una clase.
 
 ```php
-class User {
-  public $name;
+class Usuario {
+  public $nombre;
   public $email;
-  public $password;
-  function set_name($name){
-    $this->name = $name;
+  public $contra;
+  function set_nombre($nombre){
+    $this->nombre = $nombre;
   }
 }
 ```
 
-Now, we can acced that function outside the class :
+Ahora, podemos acceder a esa función desde fuera de la clase :
 
 ```php
-$user2 = new User();
+$usuario2 = new Usuario();
 
-$user2->set_name('Brad');
+$usuario2->set_nombre('Oliver');
 
-var_dump($user2);
-// object(User)#2 (3) { ["name"]=> string(4) "Brad" ["email"]=> NULL ["password"]=> NULL }
+var_dump($usuario2);
+// object(Usuario)#2 (3) { ["nombre"]=> string(4) "Oliver" ["email"]=> NULL ["contra"]=> NULL }
 ```
 
 ### Constructor
 
-A constructor is a method that runs when an object is created.
+Un constructor es un método que se ejecuta cuando un objeto es creado.
 
 ```php
-class User {
-  public $name;
+class Usuario {
+  public $nombre;
   public $email;
-  public $password;
-  public function __construct($name,$email,$password){
-    $this->name = $name;
+  public $contra;
+  public function __construct($nombre,$email,$contra){
+    $this->nombre = $nombre;
     $this->email = $email;
-    $this->password = $password;
+    $this->contra = $contra;
   }
 }
 ```
 
-Now, thanks to the constructor, when we instantiate a user we can pass it the values :
+Ahora, gracias al constructor, cuando instanciemos a algún Usuario podemos pasarle esos valores :
 
 ```php
-$user1 = new User('Brad','brad@gmail.com','securePassword');
-$user2 = new User('Juan','fedevalverde@gmail.com','1234');
+$usuario1 = new Usuario('Oliver','oliver@gmail.com','securePassword');
+$usuario2 = new Usuario('Federico','fedevalverde@gmail.com','1234');
 
-print_r($user1);
-// User Object ( [name] => Brad [email] => brad@gmail.com [password] => securePassword )
+print_r($usuario1);
+// Usuario Object ( [nombre] => Oliver [email] => oliver@gmail.com [contra] => securePassword )
 echo '<br/>';
-print_r($user2);
-// User Object ( [name] => Juan [email] => fedevalverde@gmail.com [password] => 1234 )
+print_r($usuario2);
+// Usuario Object ( [nombre] => Federico [email] => fedevalverde@gmail.com [contra] => 1234 )
 ```
 
-### Inheritence
+### Herencia
 
-When a class belong to other class
+Esto es cuando una clase pertenece a otra clase
 
 ```php
-class Employee extends User{
-  public function __construct($name,$email,$password,$title){
-    parent::__construct($name,$email,$password);
-    $this->title = $title;
+class Trabajador extends Usuario{
+  public function __construct($nombre,$email,$contra,$titulo){
+    parent::__construct($nombre,$email,$contra);
+    $this->titulo = $titulo;
   }
-  function get_title(){
-    return $this->title;
+  function get_titulo(){
+    return $this->titulo;
   }
 }
 ```
 
-Now, we can create an Employee
+Ahora, podemos crear un Trabajador:
 
 ```php
-$employee1 = new Employee('Sara', 'sara@gmail.com', '1password','Manager');
-echo $employee1->get_title();// Manager
+$trabajador1 = new Trabajador('Sara', 'sara@gmail.com', '1password','Informática');
+echo $trabajador1->get_titulo();// Informática
 ```
